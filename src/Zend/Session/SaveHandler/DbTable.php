@@ -198,7 +198,7 @@ class Zend_Session_SaveHandler_DbTable
      *
      * $lifetime === false resets lifetime to session.gc_maxlifetime
      *
-     * @param int $lifetime
+     * @param int|false $lifetime
      * @param boolean $overrideLifetime (optional)
      * @return Zend_Session_SaveHandler_DbTable
      */
@@ -212,7 +212,7 @@ class Zend_Session_SaveHandler_DbTable
             $this->_lifetime = (int) $lifetime;
         }
 
-        if ($overrideLifetime != null) {
+        if ($overrideLifetime !== null) {
             $this->setOverrideLifetime($overrideLifetime);
         }
 
