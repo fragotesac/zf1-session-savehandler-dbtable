@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @see Zend_Session_SaveHandler_DbTable
- */
-require_once 'Zend/Session/SaveHandler/DbTable.php';
 
 /**
  * Unit testing for Zend_Session_SaveHandler_DbTable include all tests for
