@@ -29,18 +29,16 @@
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Session_SaveHandler_DbTable
-    extends Zend_Db_Table_Abstract
-    implements Zend_Session_SaveHandler_Interface
+class Zend_Session_SaveHandler_DbTable extends Zend_Db_Table_Abstract implements Zend_Session_SaveHandler_Interface
 {
     const PRIMARY_ASSIGNMENT                   = 'primaryAssignment';
     const PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH = 'sessionSavePath';
     const PRIMARY_ASSIGNMENT_SESSION_NAME      = 'sessionName';
     const PRIMARY_ASSIGNMENT_SESSION_ID        = 'sessionId';
 
-    const MODIFIED_COLUMN   = 'modifiedColumn';
-    const LIFETIME_COLUMN   = 'lifetimeColumn';
-    const DATA_COLUMN       = 'dataColumn';
+    const MODIFIED_COLUMN = 'modifiedColumn';
+    const LIFETIME_COLUMN = 'lifetimeColumn';
+    const DATA_COLUMN     = 'dataColumn';
 
     const LIFETIME          = 'lifetime';
     const OVERRIDE_LIFETIME = 'overrideLifetime';
@@ -144,11 +142,11 @@ class Zend_Session_SaveHandler_DbTable
     {
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
-        } else if (!is_array($config)) {
-
+        } elseif (!is_array($config)) {
             throw new Zend_Session_SaveHandler_Exception(
                 '$config must be an instance of Zend_Config or array of key/value pairs containing '
-              . 'configuration options for Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract.');
+              . 'configuration options for Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract.'
+            );
         }
 
         foreach ($config as $key => $value) {
@@ -206,7 +204,7 @@ class Zend_Session_SaveHandler_DbTable
     {
         if ($lifetime < 0) {
             throw new Zend_Session_SaveHandler_Exception();
-        } else if (empty($lifetime)) {
+        } elseif (empty($lifetime)) {
             $this->_lifetime = (int) ini_get('session.gc_maxlifetime');
         } else {
             $this->_lifetime = (int) $lifetime;
@@ -389,7 +387,6 @@ class Zend_Session_SaveHandler_DbTable
     protected function _setupTableName()
     {
         if (empty($this->_name) && basename(($this->_name = session_save_path())) != $this->_name) {
-
             throw new Zend_Session_SaveHandler_Exception('session.save_path is a path and not a table name.');
         }
 
@@ -408,24 +405,24 @@ class Zend_Session_SaveHandler_DbTable
     {
         if ($this->_primaryAssignment === null) {
             $this->_primaryAssignment = array(1 => self::PRIMARY_ASSIGNMENT_SESSION_ID);
-        } else if (!is_array($this->_primaryAssignment)) {
+        } elseif (!is_array($this->_primaryAssignment)) {
             $this->_primaryAssignment = array(1 => (string) $this->_primaryAssignment);
-        } else if (isset($this->_primaryAssignment[0])) {
+        } elseif (isset($this->_primaryAssignment[0])) {
             array_unshift($this->_primaryAssignment, null);
 
             unset($this->_primaryAssignment[0]);
         }
 
         if (count($this->_primaryAssignment) !== count($this->_primary)) {
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
-              . "for each session table primary key.");
-        } else if (!in_array(self::PRIMARY_ASSIGNMENT_SESSION_ID, $this->_primaryAssignment)) {
-
+              . 'for each session table primary key.'
+            );
+        } elseif (!in_array(self::PRIMARY_ASSIGNMENT_SESSION_ID, $this->_primaryAssignment)) {
             throw new Zend_Session_SaveHandler_Exception(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
-              . "for the session id ('" . self::PRIMARY_ASSIGNMENT_SESSION_ID . "').");
+              . "for the session id ('" . self::PRIMARY_ASSIGNMENT_SESSION_ID . "')."
+            );
         }
     }
 
@@ -438,20 +435,20 @@ class Zend_Session_SaveHandler_DbTable
     protected function _checkRequiredColumns()
     {
         if ($this->_modifiedColumn === null) {
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::MODIFIED_COLUMN . "' which names the "
-              . "session table last modification time column.");
-        } else if ($this->_lifetimeColumn === null) {
-
+              . 'session table last modification time column.'
+            );
+        } elseif ($this->_lifetimeColumn === null) {
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::LIFETIME_COLUMN . "' which names the "
-              . "session table lifetime column.");
-        } else if ($this->_dataColumn === null) {
-
+              . 'session table lifetime column.'
+            );
+        } elseif ($this->_dataColumn === null) {
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::DATA_COLUMN . "' which names the "
-              . "session table data column.");
+              . 'session table data column.'
+            );
         }
     }
 
