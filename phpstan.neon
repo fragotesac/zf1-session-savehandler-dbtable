@@ -1,7 +1,8 @@
 parameters:
+    level: 7
+    paths: 
+        - ./
     excludes_analyse:
         - %rootDir%/../../../vendor/*
         - %rootDir%/../../../tests/*
     ignoreErrors:
-        - '#Casting to bool something that.s already bool\.#'
-        - '#Casting to string something that.s already string\.#'
