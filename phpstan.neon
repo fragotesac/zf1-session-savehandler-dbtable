@@ -6,3 +6,10 @@ parameters:
         - %rootDir%/../../../vendor/*
         - %rootDir%/../../../tests/*
     ignoreErrors:
+        # I believe $this->_name is checked with the empty check above this, but probably could be null still
+        -
+            message: '#Parameter \#1 \$haystack of function strpos expects string, string\|null given\.#'
+            path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php
+        -
+            message: '#Parameter \#2 \$str of function explode expects string, string\|null given\.#'
+            path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php
