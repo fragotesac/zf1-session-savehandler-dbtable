@@ -73,7 +73,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped(
@@ -90,7 +90,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         if ($this->_db instanceof Zend_Db_Adapter_Abstract) {
             $this->_dropTable();
@@ -114,7 +114,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
             $this->_usedSaveHandlers[] = $saveHandler = new Zend_Session_SaveHandler_DbTable(null);
             $this->fail('Expected Zend_Session_SaveHandler_Exception not thrown');
         } catch (Zend_Session_SaveHandler_Exception $e) {
-            $this->assertContains('$config must be', $e->getMessage());
+            $this->assertStringContainsString('$config must be', $e->getMessage());
         }
     }
 
@@ -496,7 +496,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (id = '$id') AND (save_path = '') AND (name = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -514,7 +514,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = "WHERE (\"id\" = '$id') AND (\"save_path\" = '') AND (\"name\" = '')";
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
     }
 
     /**
@@ -539,7 +539,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = 'WHERE (modified + lifetime < ';
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
 
         $configDb = array(
             'options' => array(
@@ -557,7 +557,7 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit\Framework\TestCase
                           ->getLastQueryProfile()
                           ->getQuery();
         $partQueryExpected = 'WHERE ("modified" + "lifetime" < ';
-        $this->assertContains($partQueryExpected, $lastQuery);
+        $this->assertStringContainsString($partQueryExpected, $lastQuery);
     }
 
     /**

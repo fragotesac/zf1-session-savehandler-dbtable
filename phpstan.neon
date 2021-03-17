@@ -12,5 +12,5 @@ parameters:
             message: '#Parameter \#1 \$haystack of function strpos expects string, string\|null given\.#'
             path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php
         -
-            message: '#Parameter \#2 \$str of function explode expects string, string\|null given\.#'
+            message: '#Parameter \#2 \$str(ing)? of function explode expects string, string\|null given\.#'
             path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php

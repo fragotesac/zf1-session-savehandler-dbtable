@@ -386,7 +386,11 @@ class Zend_Session_SaveHandler_DbTable extends Zend_Db_Table_Abstract implements
      */
     protected function _setupTableName()
     {
-        if (empty($this->_name) && basename(($this->_name = session_save_path())) != $this->_name) {
+        $path = session_save_path();
+        if (!$path) {
+            $path = '';
+        }
+        if (empty($this->_name) && basename(($this->_name = $path)) != $this->_name) {
             throw new Zend_Session_SaveHandler_Exception('session.save_path is a path and not a table name.');
         }
 
