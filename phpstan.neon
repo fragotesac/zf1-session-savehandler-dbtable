@@ -3,14 +3,18 @@ parameters:
     level: 8
     paths:
         - ./
-    excludes_analyse:
+    excludePaths:
         - %rootDir%/../../../vendor/*
         - %rootDir%/../../../tests/*
     ignoreErrors:
         # I believe $this->_name is checked with the empty check above this, but probably could be null still
         -
             message: '#Parameter \#1 \$haystack of function strpos expects string, string\|null given\.#'
-            path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php
+            path: ./src/Zend/Session/SaveHandler/DbTable.php
         -
             message: '#Parameter \#2 \$str(ing)? of function explode expects string, string\|null given\.#'
-            path: %currentWorkingDirectory%/src/Zend/Session/SaveHandler/DbTable.php
+            path: ./src/Zend/Session/SaveHandler/DbTable.php
+        # THis appears to be intentional
+        -
+            message: '#Do-while loop condition is always false\.#'
+            path: ./src/Zend/Session/SaveHandler/DbTable.php
