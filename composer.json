@@ -1,5 +1,5 @@
 {
-    "name": "diablomedia/zendframework1-session-savehandler-dbtable",
+    "name": "fragotesac/zf1-session-savehandler-dbtable",
     "description": "Zend Framework 1 Session_SaveHandler_DbTable component",
     "type": "library",
     "keywords": [
